@@ -1,0 +1,522 @@
+@import "https://fonts.googleapis.com/css2?family=Raleway&display=swap";
+
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+body{
+    font-family:'Raleway',sans-serif;
+    color:#83d79b;
+    background:#E4E4E4;
+    transition:.3s ease-out;
+       font-size:20px;
+ padding: 20px;
+ overflow-x: hidden;
+}
+p {
+  font-size: 28px;
+}
+
+    .wrapper {
+      margin: 50px auto;
+      max-width: 800px;
+    }
+
+    .filter {
+      padding: 20px 0;
+      margin-bottom: 20px;
+      border-bottom: solid 1px #e3e3e3;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .filter a {
+      margin-right: 10px;
+  margin-bottom: 10px;
+  color: #83d79b;
+  text-decoration: none;
+  padding: 4px 15px;
+  display: inline-block;
+    }
+
+    .filter a.current {
+      background: #83d79b;
+      color: #CBE39F;
+  }
+  .filter  {
+    font-size: 16px !important;
+  }
+
+    .grid {
+      margin: 0 auto;
+      padding: 10px;
+      -webkit-perspective: 1000px;
+      perspective: 1000px;
+    }
+
+    .grid-item {
+      width: 180px;
+      height: 150px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .fancybox {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 4px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      transition: all .5s;
+    }
+
+    .grid-item:hover .fancybox {
+      transform: scale(1.1);
+    }
+
+    .grid-item:nth-child(1) .fancybox {
+      background-image: url(deer.jpg);
+    }
+
+    .grid-item:nth-child(2) .fancybox {
+      background-image: url(impostersmallgif.gif);
+    }
+
+    .grid-item:nth-child(3) .fancybox {
+      background-image: url(https://images.saatchiart.com/saatchi/2025261/art/9547679/8610781-FJBXTBCS-6.jpg);
+    }
+
+    .grid-item:nth-child(4) .fancybox {
+      background-image: url(firstimpressionssmall.gif);
+    }
+
+    .grid-item:nth-child(5) .fancybox {
+      background-image: url(camelcrush.gif);
+    }
+
+    .grid-item:nth-child(6) .fancybox {
+      background-image: url(https://cdn.dribbble.com/users/2525677/screenshots/13017491/media/a78ea2f8a1d484cf2bcf20646cd6d64d.jpg?compress=1&resize=1000x750&vertical=top);
+    }
+
+    .grid-item:nth-child(7) .fancybox {
+            background-image: url(geminismall.gif);
+}
+
+    .grid-item:nth-child(8) .fancybox {
+      background-image: url(https://images.saatchiart.com/saatchi/2025261/art/9592571/8655671-ZTNMNCOH-6.jpg);
+    }
+
+    .grid-item:nth-child(9) .fancybox {
+      background-image: url(https://images.saatchiart.com/saatchi/2025261/art/9547643/8610745-NCEOXWAL-6.jpg);
+    }
+
+    .grid-item:nth-child(10) .fancybox {
+      background-image: url(mon.jpg);
+    }
+
+    .grid-item:nth-child(11) .fancybox {
+      background-image: url(https://cdn.dribbble.com/users/2525677/screenshots/14434078/media/4bc88cbcdfdbee75ac7cddca779f9412.png?compress=1&resize=1600x1200&vertical=top);
+    }
+
+    .grid-item:nth-child(12) .fancybox {
+      background-image: url(https://images.saatchiart.com/saatchi/2025261/art/10135831/9198601-PDJDTQVS-6.jpg);
+    }
+
+    .grid-item:nth-child(13) .fancybox {
+      background-image: url(https://images.saatchiart.com/saatchi/2025261/art/10085711/9148483-PKXAEFLN-7.jpg);
+    }
+
+    .grid-item:nth-child(14) .fancybox {
+      background-image: url(smalldandy.gif);
+    }
+
+    .grid-item:nth-child(15) .fancybox {
+      background-image: url(https://images.saatchiart.com/saatchi/2025261/art/10008207/9071125-LXGBONOX-6.jpg);
+    }
+
+    .grid-item:nth-child(16) .fancybox {
+      background-image: url(https://images.saatchiart.com/saatchi/2025261/art/9508531/8571635-WBZGUNMN-6.jpg);
+    }
+    .grid-item:nth-child(17) .fancybox {
+      background-image: url(https://f8n-production-collection-assets.imgix.net/0x991F0B08d49626A789db85FD936aa9E8E94ff1Fc/6/nft.png?q=80&auto=format%2Ccompress&cs=srgb&max-w=1680&max-h=1680);
+    }
+
+    .grid-item:nth-child(18) .fancybox {
+      background-image: url(smoldergif.gif);
+    }
+
+    .grid-item:nth-child(19) .fancybox {
+      background-image: url(https://cdn.dribbble.com/users/2525677/screenshots/18300357/media/539de11cffec75f371a4fc9f17b62800.gif);
+    }
+
+    .grid-item:nth-child(20) .fancybox {
+      background-image: url(rhapsody.jpg);
+    }
+
+    .grid-item:nth-child(21) .fancybox {
+      background-image: url(boredom.jpg);
+    }
+
+    .grid-item:nth-child(22) .fancybox {
+      background-image: url(https://images.saatchiart.com/saatchi/2025261/art/9508613/8571717-EXRORATQ-6.jpg);
+    }
+
+    .grid-item:nth-child(23) .fancybox {
+      background-image: url(https://images.saatchiart.com/saatchi/2025261/art/9989157/9052075-ALRPFWKY-6.jpg);
+    }
+
+    .grid-item:nth-child(24) .fancybox {
+      background-image: url(https://images.saatchiart.com/saatchi/2025261/art/9501517/8564621-QJCYKGJZ-6.jpg);
+    }
+
+    
+    .grid-item:nth-child(25) .fancybox {
+      background-image: url(https://f8n-production-collection-assets.imgix.net/0x991F0B08d49626A789db85FD936aa9E8E94ff1Fc/7/nft.gif?q=80&auto=compress&cs=srgb&h=640);
+    }
+
+    .grid-item:nth-child(26) .fancybox {
+      background-image: url(waitresssmall.gif);
+    }
+
+    .grid-item:nth-child(27) .fancybox {
+      background-image: url(coffeethumb.gif);
+    }
+
+    .grid-item:nth-child(28) .fancybox {
+      background-image: url(nymph.jpg);
+    }
+
+    .grid-item:nth-child(29) .fancybox {
+      background-image: url(smallbreathing.gif);
+    }
+
+    .grid-item:nth-child(30) .fancybox {
+      background-image: url(https://cdn.dribbble.com/users/2525677/screenshots/15313147/media/6f9983afe118d5d5aa17fe083e98281e.png?compress=1&resize=1000x750&vertical=top);
+    }
+
+    .grid-item:nth-child(31) .fancybox {
+      background-image: url(https://cdn.dribbble.com/users/2525677/screenshots/14303043/media/61b31d1b281a7d7c2c24b9cce2677f83.jpg?compress=1&resize=1600x1200&vertical=top);
+    }
+
+    .grid-item:nth-child(32) .fancybox {
+      background-image: url(yabss.gif);
+    }
+
+    .grid-item:nth-child(33) .fancybox {
+      background-image: url(atom.gif);
+    }
+
+    .grid-item:nth-child(34) .fancybox {
+      background-image: url(scribegif.gif);
+    }
+
+    .grid-item:nth-child(35) .fancybox {
+      background-image: url(bfgif.gif);
+    }
+
+    
+    .grid-item:nth-child(36) .fancybox {
+   background-image: url(https://f8n-production-collection-assets.imgix.net/0x991F0B08d49626A789db85FD936aa9E8E94ff1Fc/16/nft.gif?q=80&auto=compress&cs=srgb&h=640);
+   
+    }
+
+        
+    .grid-item:nth-child(37) .fancybox {
+      background-image: url(ytv.gif.gif);
+    }
+    .grid-item:nth-child(38) .fancybox {
+      background-image: url(https://mkpcdn.com/500x/b87805f6f213dc187214aa55d6762ca9_157579.jpg);
+    }
+/* new jab  */
+.grid-item:nth-child(39) .fancybox {
+  background-image: url(budlingologo.jpg);
+}
+.grid-item:nth-child(40) .fancybox {
+  background-image: url(doc.jpg);
+}
+.grid-item:nth-child(41) .fancybox {
+  background-image: url(docbrandimage.jpg);
+}
+.grid-item:nth-child(42) .fancybox {
+  background-image: url(flowstatelogo.jpg);
+}
+.grid-item:nth-child(43) .fancybox {
+  background-image: url(fsfs.jpg);
+}
+.grid-item:nth-child(44) .fancybox {
+  background-image: url(fslc.jpg);
+}
+.grid-item:nth-child(45) .fancybox {
+  background-image: url(fslogo.jpg);
+}
+.grid-item:nth-child(46) .fancybox {
+  background-image: url(moonlightlabellogo.jpg);
+}
+.grid-item:nth-child(47) .fancybox {
+  background-image: url(yablalogoserious.jpg);
+}
+.grid-item:nth-child(48) .fancybox {
+  background-image: url(mnfsmall.gif);
+}
+.grid-item:nth-child(49) .fancybox {
+  background-image: url(icarus.gif);
+}
+.grid-item:nth-child(50) .fancybox {
+  background-image: url(rtxsessionsnew.jpg);
+}
+.grid-item:nth-child(51) .fancybox {
+  background-image: url(bluesmall.gif);
+}
+.grid-item:nth-child(52) .fancybox {
+  background-image: url(https://images.saatchiart.com/saatchi/2025261/art/10282211/9344835-KGHBYODG-6.jpg);
+}
+.grid-item:nth-child(53) .fancybox {
+  background-image: url(pokerface.gif);
+}
+.grid-item:nth-child(54) .fancybox {
+  background-image: url(flash.jpg);
+}
+.grid-item:nth-child(55) .fancybox {
+  background-image: url(billnye.JPG);
+}
+.grid-item:nth-child(56) .fancybox {
+  background-image: url(plant.jpg);
+}
+.grid-item:nth-child(57) .fancybox {
+  background-image: url(hearsaysmall.gif);
+}
+.grid-item:nth-child(58) .fancybox {
+  background-image: url(rivers.jpg);
+}
+.grid-item:nth-child(59) .fancybox {
+  background-image: url(https://artist.callforentry.org/artistsimages/websized/4764066.jpg?rand=1657672575);
+} 
+.grid-item:nth-child(60) .fancybox {
+  background-image: url(https://cdn.dribbble.com/users/2525677/screenshots/19241007/media/fe30d8e7b9df0d5b80e2878503ec2c74.gif);
+} 
+.grid-item:nth-child(61) .fancybox {
+  background-image: url(huurocksmall.jpg);
+} 
+.grid-item:nth-child(62) .fancybox {
+  background-image: url(https://images.saatchiart.com/saatchi/2025261/art/9660641/8723741-CERBQLHB-7.jpg);
+} 
+.grid-item:nth-child(63) .fancybox {
+  background-image: url(sunset.jpg);
+} 
+.grid-item:nth-child(64) .fancybox {
+  background-image: url(https://images.saatchiart.com/saatchi/2025261/art/9904175/8967103-PRUSFYSF-6.jpg);
+} 
+.grid-item:nth-child(65) .fancybox {
+  background-image: url(vibranium.jpg);
+} 
+.grid-item:nth-child(66) .fancybox {
+  background-image: url(https://images.saatchiart.com/saatchi/2025261/art/9859843/8922789-HOVWEYOC-6.jpg);
+} 
+.grid-item:nth-child(67) .fancybox {
+  background-image: url(https://images.saatchiart.com/saatchi/2025261/art/9959185/9022103-JEHNOXNN-6.jpg);
+} 
+.grid-item:nth-child(68) .fancybox {
+  background-image: url(https://images.saatchiart.com/saatchi/2025261/art/9873111/8936057-YXDRXZUG-6.jpg);
+} 
+.grid-item:nth-child(69) .fancybox {
+  background-image: url(https://images.saatchiart.com/saatchi/2025261/art/9817769/8880727-HGVXUZLB-6.jpg);
+} 
+.grid-item:nth-child(70) .fancybox {
+  background-image: url(collage.jpg);
+} 
+.grid-item:nth-child(71) .fancybox {
+  background-image: url(youngtaunt.jpg);
+} 
+.grid-item:nth-child(72) .fancybox {
+  background-image: url(https://images.saatchiart.com/saatchi/2025261/art/9985725/9048643-HFOHZHQZ-6.jpg);
+} 
+.grid-item:nth-child(73) .fancybox {
+  background-image: url(inviso.jpg);
+} 
+.grid-item:nth-child(74) .fancybox {
+  background-image: url(blink.jpg);
+} 
+.grid-item:nth-child(75) .fancybox {
+  background-image: url(smallmood.gif);
+} 
+.grid-item:nth-child(76) .fancybox {
+  background-image: url(moose.gif);
+} 
+.grid-item:nth-child(77) .fancybox {
+  background-image: url(movemeantlowfi.gif);
+} 
+    .grid-item:nth-child(4n-5) {
+      height: 200px;
+    }
+
+    .grid-item:nth-child(2n) {
+      height: 300px;
+    }
+
+    .grid-item:nth-child(3n) {
+      height: 180px;
+    }
+
+
+
+
+    
+/* Beginning of hamburger menu */
+
+#menuToggle
+{
+  display: block;
+  position: relative;
+  top: 50px;
+  left: 40px;
+  z-index: 1;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#menuToggle a
+{
+  text-decoration: none;
+  color: #6ed492;
+
+  transition: color 0.3s ease;
+}
+
+#menuToggle a:hover
+{
+  color: #CBE39F;
+}
+
+
+#menuToggle input
+{
+  display: block;
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  top: -7px;
+  left: -5px;
+
+  cursor: pointer;
+
+  opacity: 0; /* hide this */
+  z-index: 2; /* and place it over the hamburger */
+
+  -webkit-touch-callout: none;
+}
+
+/*
+ * Just a quick hamburger
+ */
+#menuToggle span
+{
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+
+  background: #6ed492;
+  border-radius: 3px;
+
+  z-index: 1;
+
+  transform-origin: 4px 0px;
+
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
+
+#menuToggle span:first-child
+{
+  transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2)
+{
+  transform-origin: 0% 100%;
+}
+
+/*
+ * Transform all the slices of hamburger
+ * into a crossmark.
+ */
+#menuToggle input:checked ~ span
+{
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: #6ed492;
+}
+
+/*
+ * But let's hide the middle one.
+ */
+#menuToggle input:checked ~ span:nth-last-child(3)
+{
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+/*
+ * Ohyeah and the last one should go the other direction
+ */
+#menuToggle input:checked ~ span:nth-last-child(2)
+{
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+/*
+ * Make this absolute positioned
+ * at the top left of the screen
+ */
+#menu
+{
+  position: absolute;
+  width: 300px;
+  margin: -100px 0 0 -50px;
+  padding: 50px;
+  padding-top: 125px;
+left: -40px;
+background: #ededed;
+list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  /* to stop flickering of text in safari */
+
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+#menu li
+{
+  padding: 10px 0;
+  font-size: 22px;
+}
+
+/*
+ * And let's slide it in from the left
+ */
+#menuToggle input:checked ~ ul{
+   transform: none;
+}
+.wrapthestickers {
+  display: flex;
+  width: 100vw;
+}
+.fancybox-skin {
+  max-width: 90vw;
+}
+img.fancybox-image {
+width:  100%;
+}
+
+

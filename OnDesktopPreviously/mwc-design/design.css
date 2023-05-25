@@ -1,0 +1,313 @@
+@import 'https://fonts.googleapis.com/css2?family=Raleway&display=swap';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Raleway', sans-serif;
+  color: #83d79b;
+  background: #e4e4e4;
+  transition: 0.3s ease-out;
+  font-size: 20px;
+  padding: 20px;
+  overflow-x: hidden;
+}
+p {
+  font-size: 28px;
+}
+
+.wrapper {
+  margin: 50px auto;
+  max-width: 800px;
+}
+
+.filter {
+  padding: 20px 0;
+  margin-bottom: 20px;
+  border-bottom: solid 1px #e3e3e3;
+  text-align: center;
+  font-size: 12px;
+}
+
+.filter a {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  color: #83d79b;
+  text-decoration: none;
+  padding: 4px 15px;
+  display: inline-block;
+}
+
+.filter a.current {
+  background: #83d79b;
+  color: #CBE39F;
+}
+
+.grid {
+  margin: 0 auto;
+  padding: 10px;
+  /* -webkit-perspective: 1000px;
+  perspective: 1000px; */
+  width: 100vw;
+  max-width: 1200;
+}
+
+.grid-item {
+  max-width: 360px;
+  width: 100%;
+  height: 300px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+}
+
+.fancybox {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: all 0.5s;
+}
+
+.grid-item:hover .fancybox {
+  transform: scale(1.05);
+  filter: brightness(1);
+
+}
+
+/* links to items on click */
+/* yabla */
+.grid-item:nth-child(1) .fancybox {
+  background-image: url(yablacasestudy.jpg);
+}
+.grid-item:nth-child(2) .fancybox {
+  background-image: url(styleguide.jpg);
+}
+/* darkdays */
+.grid-item:nth-child(3) .fancybox {
+  background-image: url(darkdaysproject.jpg);
+}
+.grid-item:nth-child(4) .fancybox {
+  background-image: url(dark-days-broadsheet.gif);
+}
+
+/* property sponge */
+.grid-item:nth-child(5) .fancybox {
+  background-image: url(psviewcasestudy.jpg);
+}
+
+/* treachery */
+.grid-item:nth-child(6) .fancybox {
+  background-image: url(viewbuildprocess.jpg);
+}
+
+/* end links to items on click */
+
+/* variation in masonry size */
+
+/* .grid-item:nth-child(4n-5) {
+      height: 200px;
+    }
+
+    .grid-item:nth-child(2n) {
+      height: 300px;
+    }
+
+    .grid-item:nth-child(3n) {
+      height: 180px;
+    } */
+/* end variation in masonry size */
+
+/* Beginning of hamburger menu */
+
+#menuToggle {
+  display: block;
+  position: relative;
+  top: 50px;
+  left: 40px;
+  z-index: 1;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#menuToggle a {
+  text-decoration: none;
+  color: #6ed492;
+
+  transition: color 0.3s ease;
+}
+
+#menuToggle a:hover {
+  color: #CBE39F;
+}
+
+#menuToggle input {
+  display: block;
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  top: -7px;
+  left: -5px;
+
+  cursor: pointer;
+
+  opacity: 0; /* hide this */
+  z-index: 2; /* and place it over the hamburger */
+
+  -webkit-touch-callout: none;
+}
+
+/*
+ * Just a quick hamburger
+ */
+#menuToggle span {
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+  background: #6ed492;
+  border-radius: 3px;
+  z-index: 1;
+  transform-origin: 4px 0px;
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+    background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
+}
+
+#menuToggle span:first-child {
+  transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2) {
+  transform-origin: 0% 100%;
+}
+
+/*
+ * Transform all the slices of hamburger
+ * into a crossmark.
+ */
+#menuToggle input:checked ~ span {
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: #6ed492;
+}
+
+/*
+ * But let's hide the middle one.
+ */
+#menuToggle input:checked ~ span:nth-last-child(3) {
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+/*
+ * Ohyeah and the last one should go the other direction
+ */
+#menuToggle input:checked ~ span:nth-last-child(2) {
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+/*
+ * Make this absolute positioned
+ * at the top left of the screen
+ */
+#menu {
+  position: absolute;
+  width: 300px;
+  margin: -100px 0 0 -50px;
+  padding: 50px;
+  padding-top: 125px;
+  left: -40px;
+  background: #ededed;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  /* to stop flickering of text in safari */
+
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+}
+
+#menu li {
+  padding: 10px 0;
+  font-size: 22px;
+}
+
+/*
+ * And let's slide it in from the left
+ */
+#menuToggle input:checked ~ ul {
+  transform: none;
+}
+.wrapthestickers {
+  display: flex;
+  width: 100vw;
+}
+.summary {
+  display: flex;
+  justify-content: center;
+}
+.summary p {
+  color: black;
+  font-size: 16px;
+  text-align: center;
+  margin: 24px auto 24px auto;
+  line-height: 1.5;
+  max-width:  500px;
+}
+.show {
+  display: block;
+}
+.hide {
+  display: none !important;
+}
+
+.filter p {
+  font-size: 16px !important;
+}
+.fancybox-skin {
+  max-width:  90vw;
+}
+
+.tabpic {
+  width: 100%;
+  height: 100%;
+    transition: .5s;
+  min-width: 220px;
+}
+.tabpic:hover {
+  transform: scale(1.1);
+  transition: .5s;
+
+}
+.hovertext {
+  position: absolute;
+opacity: 0;
+display: flex;
+z-index: 10;
+padding: 24px;
+  justify-content: left;
+  align-items: stretch;
+  flex-wrap: wrap;
+  font-size: 16px;
+  height: 100%;
+  text-align: left !important;
+  
+  
+}
+.hovertext:hover {
+  visibility: visible;
+opacity: 1;
+background-color: #6ed492;
+color:#CBE39F;
+
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+body {
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				position: fixed;
+				background: rgba(0,0,0, 1);
+}
+.iframe , footer {  
+display: flex;
+justify-content: center;
+align-content: center;
+color: #ffffff
+}
+    </style>
+</head>
+<body>
+    <nav role="navigation">
+        <div id="menuToggle">
+          <!--
+          A fake / hidden checkbox is used as click reciever,
+          so you can use the :checked selector on it.
+          -->
+          <input type="checkbox" />
+          <span></span>
+          <span></span>
+          <span></span>
+          
+          <ul id="menu">
+            <a  href="../index.html"><li>Home</li></a>
+               
+            <a href="#"><li>Gallery</li></a>
+            <a href="#"><li>Location</li></a>
+            <a href="#"><li>About Gyasi </li></a>
+          </ul>
+        </div>
+      </nav>
+      <div class="iframe">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.572424162284!2d-73.93573988417675!3d40.705413579332735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25c00e4dce25f%3A0xed62a4684e0e0b62!2s49%20Bogart%20St%2035%203rd%2C%20Brooklyn%2C%20NY%2011206!5e0!3m2!1sen!2sus!4v1645889906986!5m2!1sen!2sus" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  </div>
+<footer> <h3> We are located at 49 bogart st, suite #35 in Bushwick. </h3> </footer>
+</body>
+</html>

@@ -1,0 +1,906 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+    <title>Senet</title>
+	<script type="text/javascript" src="js/phaser.min.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+            background: #000000;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+
+//While the game's assets are loading, we want to have a loading cursor.
+document.body.style.cursor = "wait";
+
+/*
+This game is based on the ancient Egyptian game called Senet.
+*/
+
+var game = new Phaser.Game(1200, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update, parent: game});
+
+/*
+Here we load all the assets for the game. As you can see in the declaration of game variable above, preload is built
+into phaser. These assets include sound files as well as spritesheets used for graphics.
+*/
+
+function preload() {
+
+    game.load.image('background', 'assets/background.png');
+    game.load.spritesheet('piece', 'assets/piecesprite2.png', 105, 105);
+    game.load.spritesheet('stick', 'assets/sticksprite.png', 413, 50);
+    game.load.spritesheet('eye', 'assets/eyesprite.png', 200, 200);
+    game.load.spritesheet('rules', 'assets/rulesSprite.png', 30, 30);
+
+
+    game.load.audio('rollSound', 'assets/roll_sound.ogg');
+
+
+
+
+
+
+}
+
+//Here we declare all the variables that the game will use.
+
+//These variables are the game's sounds.
+
+var rollSound;
+
+
+//The board that the game is played on has 30 squares which I refer to as "spots". Their value will change depending on
+//if there is a white piece, a black piece, or nothing in them.
+var spot0;
+var spot1;
+var spot2;
+var spot3;
+var spot4;
+var spot5;
+var spot6;
+var spot7;
+var spot8;
+var spot9;
+var spot10;
+var spot11;
+var spot12;
+var spot13;
+var spot14;
+var spot15;
+var spot16;
+var spot17;
+var spot18;
+var spot19;
+var spot20;
+var spot21;
+var spot22;
+var spot23;
+var spot24;
+var spot25;
+var spot26;
+var spot27;
+var spot28;
+var spot29;
+
+//The text that appears in the bottom right corner of the game window is split into three lines. Each line displays
+//different information. For instance, if the player rolls a 4, the first line will say "You rolled a 4." and the
+//second line will say "Choose a piece to move ahead 4 spaces."
+var gameText;
+var gameText2;
+var gameText3;
+
+//The eye in the bottom left corner is a clickable sprite that the player clicks on to advance the game, either by
+//rolling or simulating the AI's move.
+var eye;
+
+//Below the game window, the rules for the game are listed. There is a small button in the bottom right corner that
+//toggles the rules on and off with the toggleRules() function.
+var rules;
+var rulesOn = true;
+
+
+var stick1Sprite;
+var stick2Sprite;
+var stick3Sprite;
+var stick4Sprite;
+
+//When the player rolls, each of the 4 sticks can be either white or black, or 1 and 0 respectively. At the start of the
+//game, they begin as 2 as a placeholder variable.
+var stick1 = 2;
+var stick2 = 2;
+var stick3 = 2;
+var stick4 = 2;
+
+//sum is the sum of all of the sticks.
+var sum = 0;
+
+//gameStage is used to determine whose turn it is. 0 is the start of the game. 1 is after the player rolls and is
+//prompted to choose a piece. 2 is when it's the computer's turn. 3 is when the player is prompted to roll. 4 is when
+//the computer wins. 5 is when the player wins.
+var gameStage = 0;
+
+//spot is used for constructing the board's spots.
+var spot = "spot";
+
+//board is used as the visual representation of the game board on the screen. The board array is loaded with 30 variables,
+//one for each spot on the board. Those variables are equal to either 0, 1, or 2; indicating an empty space, a white
+//piece, or a black piece respectively.
+var board = [];
+
+//The spots array contains all of the clickable sprites used by the game. There are 30 unique sprites used on the screen,
+//one for each spot on the board. We later load these variables into an array so that we can call the index of the spot's
+//id in the array in order to interface the sprites for each spot with the board array.
+var spots = [];
+
+//songList is an array of all of the songs. They are loaded into an array so that one may be chosen randomly.
+var songList;
+
+//There are 37 songs the game can choose from. One is randomly chosen here using the getRandomInt() function.
+var songChoice = getRandomInt(37);
+
+//When either the player of the computer wins, one of these variables is changed to true. If either of them are true,
+//the roll button will not respond to the player's input.
+var playerWin = false;
+var compWin = false;
+
+
+//At the beginning of the game, the first ten spaces will be filled with pieces. The order of them alternates, with the
+//first piece being white, the second black, the third white, and so on. We populate the board array starting with 1s
+//and 2s to indicate where pieces will be on the board.
+for (var i = 0; i < 5; i++) {
+    board.push(1);
+    board.push(2);
+}
+
+//Here we fill the rest of the board with 0s to indicate empty squares.
+for (var i = 0; i < 21; i++) {
+    board.push(0);
+}
+
+//These variables are used as an indicator of how many pieces each player has remaining on the board. When either of
+//these reaches 0, the game will end. A check is done each time the update function runs to check the number of pieces
+//each player has remaining on the board.
+var playerSum = 0;
+var compSum = 0;
+
+function create() {
+
+
+    //Here we add all of the sound and sprite assets into the game window.
+    rollSound = game.add.audio('rollSound');
+
+
+    game.add.image(0, 0, 'background');
+
+
+    spot0 = game.add.sprite(51, 30, 'piece', board[0]);
+    spot1 = game.add.sprite(165, 30, 'piece', board[1]);
+    spot2 = game.add.sprite(274, 30, 'piece', board[2]);
+    spot3 = game.add.sprite(384, 30, 'piece', board[3]);
+    spot4 = game.add.sprite(495, 30, 'piece', board[4]);
+    spot5 = game.add.sprite(606, 30, 'piece', board[5]);
+    spot6 = game.add.sprite(714, 30, 'piece', board[6]);
+    spot7 = game.add.sprite(825, 30, 'piece', board[7]);
+    spot8 = game.add.sprite(935, 30, 'piece', board[8]);
+    spot9 = game.add.sprite(1044, 30, 'piece', board[9]);
+    spot10 = game.add.sprite(1044, 145, 'piece', board[10]);
+    spot11 = game.add.sprite(935, 145, 'piece', board[11]);
+    spot12 = game.add.sprite(825, 145, 'piece', board[12]);
+    spot13 = game.add.sprite(714, 145, 'piece', board[13]);
+    spot14 = game.add.sprite(606, 145, 'piece', board[14]);
+    spot15 = game.add.sprite(495, 145, 'piece', board[15]);
+    spot16 = game.add.sprite(384, 145, 'piece', board[16]);
+    spot17 = game.add.sprite(274, 145, 'piece', board[17]);
+    spot18 = game.add.sprite(165, 145, 'piece', board[18]);
+    spot19 = game.add.sprite(51, 145, 'piece', board[19]);
+    spot20 = game.add.sprite(51, 250, 'piece', board[20]);
+    spot21 = game.add.sprite(165, 250, 'piece', board[21]);
+    spot22 = game.add.sprite(274, 250, 'piece', board[22]);
+    spot23 = game.add.sprite(384, 250, 'piece', board[23]);
+    spot24 = game.add.sprite(495, 250, 'piece', board[24]);
+    spot25 = game.add.sprite(606, 250, 'piece', board[25]);
+    spot26 = game.add.sprite(714, 250, 'piece', board[26]);
+    spot27 = game.add.sprite(825, 250, 'piece', board[27]);
+    spot28 = game.add.sprite(935, 250, 'piece', board[28]);
+    spot29 = game.add.sprite(1044, 250, 'piece', board[29]);
+
+    //In order to make each spot on the game board clickable, we must give each spot a unique id, which will be later
+    //passed to the move() function. The move() function needs to know the id of the square the player clicked on to
+    //know which piece to move.
+    spot0.id = 0;
+    spot1.id = 1;
+    spot2.id = 2;
+    spot3.id = 3;
+    spot4.id = 4;
+    spot5.id = 5;
+    spot6.id = 6;
+    spot7.id = 7;
+    spot8.id = 8;
+    spot9.id = 9;
+    spot10.id = 10;
+    spot11.id = 11;
+    spot12.id = 12;
+    spot13.id = 13;
+    spot14.id = 14;
+    spot15.id = 15;
+    spot16.id = 16;
+    spot17.id = 17;
+    spot18.id = 18;
+    spot19.id = 19;
+    spot20.id = 20;
+    spot21.id = 21;
+    spot22.id = 22;
+    spot23.id = 23;
+    spot24.id = 24;
+    spot25.id = 25;
+    spot26.id = 26;
+    spot27.id = 27;
+    spot28.id = 28;
+    spot29.id = 29;
+
+    //Here we populate the spots array with each of the spot variables.
+    for (var i = 0; i < 30; i++) {
+        spots.push(spot+i);
+    }
+
+    spots = [spot0, spot1, spot2, spot3, spot4, spot5, spot6, spot7, spot8, spot9, spot10, spot11,
+        spot12, spot13, spot14, spot15, spot16, spot17, spot18, spot19, spot20, spot21, spot22, spot23,
+        spot24, spot25, spot26, spot27, spot28, spot29];
+
+    for (var i = 0; i < 30; i++) {
+        spots[i].inputEnabled = true;
+        spots[i].events.onInputDown.add(move, {spot:spots[i].id});
+    }
+
+
+    //The following code is used to draw the sand colored background used below the board.
+    var graphics = game.add.graphics(0, 0);
+    graphics.lineStyle(10, 0xcbbe9b, 0);
+    graphics.beginFill(0xcbbe9b, 1);
+    graphics.lineStyle(2, 0xcbbe9b, 1);
+    graphics.drawRect(0, 386, 1200, 600);
+    window.graphics = graphics;
+
+    //The stick sprites are added to the game window.
+    stick1Sprite = game.add.sprite(205, 393, 'stick', stick1);
+    stick2Sprite = game.add.sprite(205, 443, 'stick', stick2);
+    stick3Sprite = game.add.sprite(205, 493, 'stick', stick3);
+    stick4Sprite = game.add.sprite(205, 543, 'stick', stick4);
+
+    //Here we make the eye in the bottom left clickable and indicate that clicking on it will run the roll() function.
+    eye = game.add.sprite(0, 393, 'eye');
+    eye.inputEnabled = true;
+    eye.events.onInputDown.add(roll, this);
+
+    //The rules button in the bottom right is enabled and clicking on it will run the rulesToggle() function.
+    rules = game.add.sprite(1168, 568, 'rules');
+    rules.inputEnabled = true;
+    rules.events.onInputDown.add(rulesToggle, this);
+
+    //The three lines of game text are added to the bottom right of the game window.
+    gameText = game.add.text(623, 387, '', { fontSize: '8px', fill: '#000000' });
+    gameText2 = game.add.text(623, 416, '', { fontSize: '8px', fill: '#000000' });
+    gameText3 = game.add.text(623, 445, '', { fontSize: '8px', fill: '#000000' });
+
+
+    var keySpace = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    keySpace.onDown.add(roll, this);
+
+}
+
+
+//The update function is run 60 times per second. This function is built into phaser and runs automatically.
+function update() {
+
+    //Once the game starts, we want to go back to a normal cursor.
+    document.body.style.cursor = "default";
+
+    //As long as neither the player or the computer has won the game, a new song will be chosen when the current one ends.
+    if (compWin === false && playerWin === false) {
+        songList[songChoice].onStop.add(playNextSong, this);
+    }
+
+    //Each of the spot sprites has three potential frames. The first frame is totally transparent. It is used to indicate
+    //an empty spot. The second and third frames hold the image for a white piece and black piece. Each time the update
+    //function is called, we check the values in the board array and update the frames of each spot on the board to
+    //reflect the board array's values.
+    spot0.frame = board[0];
+    spot1.frame = board[1];
+    spot2.frame = board[2];
+    spot3.frame = board[3];
+    spot4.frame = board[4];
+    spot5.frame = board[5];
+    spot6.frame = board[6];
+    spot7.frame = board[7];
+    spot8.frame = board[8];
+    spot9.frame = board[9];
+    spot10.frame = board[10];
+    spot11.frame = board[11];
+    spot12.frame = board[12];
+    spot13.frame = board[13];
+    spot14.frame = board[14];
+    spot15.frame = board[15];
+    spot16.frame = board[16];
+    spot17.frame = board[17];
+    spot18.frame = board[18];
+    spot19.frame = board[19];
+    spot20.frame = board[20];
+    spot21.frame = board[21];
+    spot22.frame = board[22];
+    spot23.frame = board[23];
+    spot24.frame = board[24];
+    spot25.frame = board[25];
+    spot26.frame = board[26];
+    spot27.frame = board[27];
+    spot28.frame = board[28];
+    spot29.frame = board[29];
+
+    //The roll function changes the stick variables. Here we update the frames of the stickSprites to reflect those changes.
+    stick1Sprite.frame = stick1;
+    stick2Sprite.frame = stick2;
+    stick3Sprite.frame = stick3;
+    stick4Sprite.frame = stick4;
+
+
+    //If the mouse cursor is hovering over the eye button, it will change to green.
+    eyeColor();
+
+    //playerSum and compSum are used to determine how many pieces each player has left on the board. We check the number
+    //of pieces on the board each time the update function is run. First we reset the sum to 0 then iterate through the
+    //board array. Each time we find a 1, indicating a player piece, we increment playerSum by 1. As long as we find
+    //at least one 1 in the board array, we know that the player still has some pieces on the board and has not won yet.
+    //We do the same for the computer's pieces, this time checking for 2s on the board. If we go through the whole board
+    //array and either of those sums comes out to 0, we change one of the win variables to true.
+    playerSum = 0;
+    compSum = 0;
+
+    for (var i = 0; i < 31; i++) {
+        if (board[i] === 1) {
+            playerSum++;
+        }
+        if (i === 30 && playerSum === 0) {
+            playerWin = true;
+        }
+    }
+
+    for (var i = 0; i < 31; i++) {
+        if (board[i] === 2) {
+            compSum++;
+        }
+        if (i === 30 && compSum === 0) {
+            compWin = true;
+        }
+    }
+
+    //If either the compWin or playerWin variables are found to be true, the gameStage is set to 4 or 5. When the
+    //gameStage is 4 or 5, the roll button in the bottom left will not function, thus preventing any further action from
+    //the player.
+    if (compWin) {
+        gameStage = 4;
+    }
+
+    if (playerWin) {
+        gameStage = 5;
+    }
+
+    //board[30] is used as filler spot on the board. When either player moves a piece off the board, it is moved into the
+    //31st space on the board. There aren't actually 31 spots on the board, we just use it as a filler. When either
+    //player moves a piece into that spot, the piece is meant to be removed from play, so we change that spot's value to 0.
+    board[30] = 0;
+
+    //The following code updates the values stored in the gameText variables to display messages to the player.
+    if (gameStage === 0) {
+        gameText.text = 'Welcome to Senet! Click on the eye to roll.';
+        gameText2.text = 'You are white.';
+        gameText3.text = 'See button in the bottom right for rules.';
+    }
+    if (board[26] === 1) {
+        gameText3.text = 'House of Water! You must roll a 4 or go back.';
+    }
+    if (gameStage === 1) {
+        if (sum === 0) {
+            gameText.text = 'You rolled a 5!';
+            gameText2.text = 'Choose a piece to move ahead 5 spaces.';
+        }
+        else {
+            gameText.text = 'You rolled a ' + sum + '.';
+            gameText2.text = 'Choose a piece to move ahead ' + sum + ' spaces.';
+        }
+    }
+    if (gameStage === 2) {
+        gameText.text = "It's now the computer's turn.";
+        gameText2.text = 'Click or press space to simulate.';
+        gameText2.text = '';
+    }
+    if (gameStage === 3) {
+        gameText.text = "It's your turn. Click or press space to roll.";
+        gameText2.text = '';
+    }
+    if (gameStage === 4) {
+        gameText.text = "The computer wins!";
+        gameText2.text = '';
+        gameText2.text = '';
+    }
+    if (gameStage === 5) {
+        gameText.text = "You win!";
+        gameText2.text = '';
+        gameText2.text = '';
+    }
+}
+
+//The following function is used to generate random numbers.
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+}
+
+//The following function checks the position of the mouse cursor on the screen. If it is within certain bounds, the
+//frame of the eye sprite is changed, which makes it take on a green color.
+function eyeColor () {
+    if (game.input.x > 0 && game.input.x < 200 && game.input.y >= 393 && game.input.y <= 593) {
+        eye.frame = 1;
+    }
+    else {
+        eye.frame = 0;
+    }
+}
+
+//Clicking on the button in the bottom right corner of the screen changes the color of the text displayed below the game
+//window. The background of the page is black so changing the color the text essentially makes the text disappear.
+function rulesToggle() {
+    window.open('senetrules.html', '_blank');
+    /*
+    if (rulesOn === true) {
+        document.getElementById("rules").style.color = "black";
+        rules.frame = 1;
+        rulesOn = false;
+    } else {
+        document.getElementById("rules").style.color = "white";
+        rules.frame = 0;
+        rulesOn = true;
+    }
+    */
+}
+
+//This function is called each time the user clicks the eye button in the bottom left corner of the game window.
+function roll () {
+    //gameStage 0 and 3 are when it's the player's turn and they haven't yet rolled.
+    if (gameStage === 0 || gameStage === 3) {
+
+        //The text on lines 2 and 3 are reset to be blank.
+        gameText2.text = '';
+        gameText3.text = '';
+
+        //The roll sound is played and each stick is made into either a 0 or 1.
+        rollSound.play();
+        stick1 = getRandomInt(2);
+        stick2 = getRandomInt(2);
+        stick3 = getRandomInt(2);
+        stick4 = getRandomInt(2);
+
+        //We add together the values stored in the stick variables to determine the player's total roll value.
+        sum = stick1 + stick2 + stick3 + stick4;
+        if (sum === 0) {
+            sum = 5;
+        }
+        //The gameStage is set to 1, which indicates the player must choose a piece to move.
+        gameStage = 1;
+    }
+
+
+    //gameStage 2 is when it's the computer's turn to move. The following code is used as the computer's logic for how
+    //to move on its turn. It is rather byzantine but there really isn't any other way to do it. After all moves, done
+    //by the player or the computer, the value of sum is reset to 0 and gameStage is updated to either 2 or 3.
+    if (gameStage === 2) {
+        rollSound.play();
+
+        stick1 = getRandomInt(2);
+        stick2 = getRandomInt(2);
+        stick3 = getRandomInt(2);
+        stick4 = getRandomInt(2);
+
+
+        sum = stick1 + stick2 + stick3 + stick4;
+        if (sum === 0) {
+            sum = 5;
+        }
+
+        //If the computer has a piece in the house of water, it must move that piece. If it rolls a 4, it can remove
+        //that piece from the board. If it rolls anything else, it must move that piece back to the ankh.
+        if (board[26] === 2) {
+            if (sum === 4) {
+                board[26] = 0;
+                gameStage = 3;
+                sum = 0;
+                gameText3.text = '';
+            }
+            else {
+                board[26] = 0;
+                board[14] = 2;
+                gameStage = 3;
+                sum = 0;
+                gameText3.text = '';
+            }
+        }
+        //This code runs if the computer can legally swap with the player's piece in the last 3 spaces of the board. The
+        //computer takes the player's place and the player's piece is moved to the house of water.
+        if (board[25] === 2 && sum !== 1 && board[25+sum] === 1) {
+            board[25+sum] = 2;
+            board[26] = 1;
+            board[25] = 0;
+            gameStage = 3;
+            sum = 0;
+        }
+        //This code is run when the computer is in the house of beauty and the space it is trying to move to is empty.
+        //That is a legal move so the computer moves its piece to that spot.
+        if (board[25] === 2 && sum !== 1 && board[25+sum] !== 2) {
+            board[25+sum] = 2;
+            board[25] = 0;
+            gameStage = 3;
+            sum = 0;
+        }
+
+
+
+        //The computer's priority is to move pieces off the board that are in the last few spaces. If one of its pieces
+        //happen to be there and they have a roll that lets them move their piece off the board, they will make that move.
+        if (board[29] === 2 && sum === 1) {
+            board[29] = 0;
+            gameStage = 3;
+            sum = 0;
+        }
+        if (board[28] === 2 && sum === 2) {
+            board[28] = 0;
+            gameStage = 3;
+            sum = 0;
+        }
+        if (board[27] === 2 && sum === 3) {
+            board[27] = 0;
+            gameStage = 3;
+            sum = 0;
+        }
+        if (board[26] === 2 && sum === 4) {
+            board[26] = 0;
+            gameStage = 3;
+            sum = 0;
+        }
+        if (board[25] === 2 && sum === 5) {
+            board[25] = 0;
+            gameStage = 3;
+            sum = 0;
+        }
+
+        //The third priority for the computer is to move pieces that are in the first half of the last row into the
+        //house of beauty.
+        if (board[24] === 2 && sum === 1 && board[25] === 0) {
+            board[24] = 0;
+            board[25] = 2;
+            gameStage = 3;
+            sum = 0;
+        }
+        if (board[23] === 2 && sum === 2 && board[25] === 0) {
+            board[23] = 0;
+            board[25] = 2;
+            gameStage = 3;
+            sum = 0;
+        }
+
+        if (board[22] === 2 && sum === 3 && board[25] === 0) {
+            board[22] = 0;
+            board[25] = 2;
+            gameStage = 3;
+            sum = 0;
+        }
+        if (board[21] === 2 && sum === 4 && board[25] === 0) {
+            board[21] = 0;
+            board[25] = 2;
+            gameStage = 3;
+            sum = 0;
+        }
+        if (board[20] === 2 && sum === 5 && board[25] === 0) {
+            board[20] = 0;
+            board[25] = 2;
+            gameStage = 3;
+            sum = 0;
+        }
+
+
+        //The following code encompasses all other moves the computer can make. If none of the above moves are available
+        //to the computer, it will default to running the following code.
+        if (gameStage === 2) {
+            var jar = false;
+            var goAgain = false;
+            //The computer's default behavior is to move the piece on the board that is farthest from the end of the
+            //board. To do this, we iterate through each spot on the board starting with the first spot. If we find a
+            //piece there, we first check if the house of water is empty. If so, we check through each spot on the board.
+            //If we get as far as spot 21, which is the first spot of the last row, we have to start doing some funny
+            //business to make sure the code doesn't break. Basically, if the computer gets to the point where it is
+            //trying to move those pieces, it has no legal moves anywhere on the board before that point. The computer
+            //is not allowed to skip the house of beauty so we check to see if it can legally move there. If we find
+            //that there are no legal moves for the computer to do, we need to jar the logic loose or it will get stuck
+            //on the computer's turn. So we if we don't find any legal moves on the board, jar is set to true.
+            for (var i = 0; i < 29; i++) {
+                if (board[i] === 2) {
+                    if (board[26] !== 2){
+                        if (i === 24 && board[24] === 2 && sum > 1) {
+                            console.log('i++ for 24');
+                            jar = true;
+                            i++;
+                        }
+                        if (i === 23 && board[23] === 2 && sum > 2) {
+                            console.log('i++ for 23');
+                            jar = true;
+                            i++;
+                        }
+                        if (i === 22 && board[22] === 2 && sum > 3) {
+                            jar = true;
+                            console.log('i++ for 22');
+                            i++;
+                        }
+                        if (i === 21 && board[21] === 2 && sum > 4) {
+                            jar = true;
+                            console.log('i++ for 21');
+                            i++;
+                        }
+
+                        //The following code is the logic for processing legal moves the computer can do. First we check
+                        //to make sure we aren't accidentally moving a piece in the last three spots on the board illegally.
+                        if (gameStage !== 3 && i !== 27 && i !== 28 && i !== 29) {
+                            if (i === 25 && sum !== 0) {
+                                i++;
+                                gameStage = 3;
+                                sum = 0;
+                            }
+                            //Here we have the actual code for executing legal moves that aren't in the last row of the
+                            //board. These moves check if the spot the computer is trying to move to is empty and then
+                            //checks to make sure its not making weird moves in the last row of the board.
+                            if (board[i] === 2 && board[sum + i] === 0) {
+                                console.log('move ' + i);
+                                if (!(i === 24 && sum > 1) && !(i === 23 && sum > 2) && !(i === 22 && sum > 3) && !(i === 21 && sum === 5)) {
+                                    board[i] = 0;
+                                    board[sum + i] = 2;
+                                    if (sum === 2 || sum === 3) {
+                                        gameStage = 3;
+                                        sum = 0;
+                                    }
+                                    if (sum === 1 || sum === 4 || sum === 5) {
+                                        gameStage = 2;
+                                        sum = 0;
+                                        goAgain = true;
+                                    }
+                                }
+                            }
+                            //Finally we run the logic for swapping pieces. If the piece the comptuer is trying to swap
+                            //with isn't protected, we make the swap and move on.
+                            if (board[i] === 2 && board[sum + i] === 1 && board[sum + i + 1] !== 1 && board[sum + i - 1] !== 1) {
+                                board[i] = 1;
+                                board[sum + i] = 2;
+                                if (sum === 2 || sum === 3) {
+                                    gameStage = 3;
+                                    sum = 0;
+                                }
+                                i = 29;
+                                if (sum === 1 || sum === 4 || sum === 5) {
+                                    gameStage = 2;
+                                    sum = 0;
+                                    goAgain = true;
+                                }
+                            }
+                        }
+                        //If we haven't found any legal moves for the computer to do, we set the gamestage to 3 to make
+                        //it the player's turn.
+                        if (jar)  {
+                            gameStage = 3;
+                            sum = 0;
+                            console.log('end of the line');
+                            jar = false;
+                        }
+                    }
+                }
+
+            }
+            //If the computer didn't roll a 1, 4, or 5 and its turn is over, we we set the gamestage to 3 to make
+            //it the player's turn.
+            if (i === 29 && goAgain === false) {
+                gameStage = 3;
+                sum = 0;
+            }
+            goAgain = false;
+        }
+    }
+}
+
+//The following function is called whenever the user has just rolled and is prompted to click on a piece to move. It
+//contains all of the logic to determine if a move is legal or not. Illegal moves include trying to swap with a protected
+//piece, trying to move anything other than the exact number to get off the board while in a house of water or in one of
+//the last 3 spots on the board. If the user chooses a valid move, the value of the current spot is changed to 0 or 2
+//and the value of the spot with the index of the current spot plus the roll is updated to 1. Any time the player tries
+//to make an illegal move, the game will forfeit the current player's turn.
+function move () {
+    //board[26] refers to the house of water. If the player has a piece there, they must move that piece. If they roll a
+    //4, they can take that piece off the board. Any other roll will send that piece back to the ankh.
+    if (board[26] === 1) {
+        if (sum === 4) {
+            board[26] = 0;
+            gameStage = 2;
+            sum = 0;
+            gameText3.text = '';
+        }
+        else {
+            board[26] = 0;
+            board[14] = 1;
+            gameStage = 2;
+            sum = 0;
+            gameText3.text = '';
+        }
+    }
+
+
+    //If board[26] does not contain a player piece, they are free to make other moves.
+    if (board[26] !== 1) {
+        //The player is not allowed to skip the house of beauty when advancing through the last row on the board. They
+        //must land exactly on that square before moving on.
+        if (this.spot === 21) {
+            if (sum > 4) {
+                gameStage = 2;
+                sum = 0;
+            }
+        }
+        if (this.spot === 22) {
+            if (sum > 3) {
+                gameStage = 2;
+                sum = 0;
+            }
+        }
+        if (this.spot === 23) {
+            if (sum > 2) {
+                gameStage = 2;
+                sum = 0;
+            }
+        }
+        if (this.spot === 24) {
+            if (sum > 1) {
+                gameStage = 2;
+                sum = 0;
+            }
+        }
+
+
+
+        //spots 27 through 29 indicate the last 3 spots on the board. The player must roll exactly 1, 2 or 3 to get off
+        //the board from these spots.
+        if (this.spot === 27) {
+            if (sum === 3) {
+                board[27] = 0;
+                gameStage = 2;
+                sum = 0;
+            }
+            else {
+                gameStage = 2;
+                sum = 0;
+            }
+        }
+        if (this.spot === 28) {
+            if (sum === 2) {
+                board[28] = 0;
+                gameStage = 2;
+                sum = 0;
+            }
+            else {
+                gameStage = 2;
+                sum = 0;
+            }
+        }
+        if (this.spot === 29) {
+            if (sum === 1) {
+                board[29] = 0;
+                gameStage = 2;
+                sum = 0;
+            }
+            else {
+                gameStage = 2;
+                sum = 0;
+            }
+        }
+
+
+
+        //The following logic is used for all moves from spaces not on the bottom row.
+        if (gameStage !== 2) {
+            //First we check the spot the player is trying to move to and that that spot is empty. To find the index of
+            //that spot, we add the index of the current player's spot to the player's roll. That gives us the index of
+            //the board array we want to check the value of. If that spot is empty we move the player's piece to that spot.
+            if (board[this.spot] === 1 && board[sum + this.spot] === 0) {
+                //Changing this.spot to 0 will make the spot that the user clicked on empty.
+                board[this.spot] = 0;
+                //Changing sum + this.spot to 1 will change a spot sum places away to a player piece. For example, if
+                //the player has a piece in spot 10 and rolled a 4, clicking on spot 10 will change spot 10's value to 0
+                //and spot 14's value to 1, assuming that it is a legal move.
+                board[sum + this.spot] = 1;
+                //If they player rolls a 1, 4, or 5, they are given another turn. We do this by setting the gamestage
+                //to 3. If they roll a 2 or a 3, their turn ends and we set the gamestage to 2, which indicates the
+                //computer's turn.
+                if (sum === 2 || sum === 3) {
+                    gameStage = 2;
+                    sum = 0;
+                }
+                if (sum === 1 || sum === 4 || sum === 5) {
+                    gameStage = 3;
+                    sum = 0;
+                }
+
+            }
+            //If the spot the player is trying to move to contains one of their own pieces, they forfeit their turn.
+            if (board[this.spot] === 1 && board[sum + this.spot] === 1) {
+                gameStage = 2;
+                sum = 0;
+            }
+
+            //The player swaps with one of the computer's pieces while in the last stretch of the board. The computer's
+            //piece is placed in the house of water.
+            if (this.spot === 25 && board[this.spot] === 1 && board[sum + this.spot] === 2) {
+                board[26] = 2;
+                board[sum + this.spot] = 1;
+                board[25] = 0;
+                if (sum === 2 || sum === 3) {
+                    gameStage = 2;
+                    sum = 0;
+                }
+                if (sum === 1 || sum === 4 || sum === 5) {
+                    gameStage = 3;
+                    sum = 0;
+                }
+            }
+
+            //The following logic is used when the player tries to swap with a computer piece and that piece is not
+            //protected.
+            if (board[this.spot] === 1 && board[sum + this.spot] === 2 && board[sum + this.spot + 1] !== 2 && board[sum + this.spot - 1] !== 2) {
+                board[this.spot] = 2;
+                board[sum + this.spot] = 1;
+                if (sum === 2 || sum === 3) {
+                    gameStage = 2;
+                    sum = 0;
+                }
+                if (sum === 1 || sum === 4 || sum === 5) {
+                    gameStage = 3;
+                    sum = 0;
+                }
+            }
+
+            //This is the logic for preventing the player from swapping with protected pieces.
+            if (board[this.spot] === 1 && board[sum + this.spot] === 2 && board[sum + this.spot + 1] === 2) {
+                if (sum === 2 || sum === 3) {
+                    gameStage = 2;
+                    sum = 0;
+                }
+                if (sum === 1 || sum === 4 || sum === 5) {
+                    gameStage = 3;
+                    sum = 0;
+                }
+            }
+            if (board[this.spot] === 1 && board[sum + this.spot] === 2 && board[sum + this.spot - 1] === 2) {
+                if (sum === 2 || sum === 3) {
+                    gameStage = 2;
+                    sum = 0;
+                }
+                if (sum === 1 || sum === 4 || sum === 5) {
+                    gameStage = 3;
+                    sum = 0;
+                }
+            }
+        }
+    }
+}
+
+</script>
+
+</body>
+
+
+</html>

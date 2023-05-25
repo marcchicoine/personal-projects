@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Case Studies</title>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,400" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.css"/>
+  <link rel="stylesheet" href="design.css">
+
+</head>
+<body><script src="/superhi.js"></script>
+  <nav role="navigation" id="navMobile">
+    <div id="menuToggle">
+      <!--
+      A fake / hidden checkbox is used as click reciever,
+      so you can use the :checked selector on it.
+      -->
+      <input type="checkbox" />
+    
+      <!--
+      Some spans to act as a hamburger.
+    
+      They are acting like a real hamburger,
+      not that McDonalds stuff.
+      -->
+      <span></span>
+      <span></span>
+      <span></span>
+    
+      <!--
+      Too bad the menu has to be inside of the button
+      but hey, it's pure CSS magic.
+      -->
+      <ul id="menu">
+        <a href="artfolio.html" ><li>art</li></a>
+        <a href="code.html" ><li>code</li></a>
+        <a href="https://drive.google.com/file/d/1WhfVSwlo5FcDqVVGtdVW1SUmtyJJyBRz/view?usp=sharing"><li>resume</li></a>
+        <a href="https://linktr.ee/artbygato"><li>links</li></a>
+    
+      </ul>
+    </div>
+    </nav>
+<!-- partial:index.partial.html -->
+<p style="text-align: center;">design</p>
+  <div class="wrapper">
+    <div class="filter">
+      <a href="#" data-filter="" class="current ya" id=""><p>all</p></a>
+      <a href="#" data-filter=".propertySponge" class="ps"><p>ux and ui</p></a>
+            <a href="#" data-filter=".darkDays" class=" dd" > <p>type and editorial</p></a>
+            <!-- <a href="#" data-filter=".treachery" class="ta"><p>logo and brand</p></a> -->
+            <a href="#" data-filter=".experimental" class=""><p>experimental</p></a>
+
+    </div>
+
+    <div class="grid">
+      
+      
+         <div class="grid-item yabla propertySponge">
+          <a class="fancybox" data-fancybox data-type="iframe" href="https://yabla-case-study.superhi.com/">        
+
+          <p class="hovertext">
+            
+           Yabla Language Learning
+           <br><br>
+            iOS, Android, Web
+            <br><br>
+            My Contribution 
+            <br><br>
+            UX/UI, 2d/3d Illustration, Motion, Website Design and Front End Dev<br><br>
+          </p>
+        </a>
+      </div>
+      <div class="grid-item yabla propertySponge">
+        <a class="fancybox" data-fancybox data-type="iframe" href="https://yabla-case-study.superhi.com/">
+        <p class="hovertext">
+          Yabla Styleguide 
+          <br><br>
+          iOS, Android, Web
+          <br><br>  
+          My Contribution 
+          <br><br>
+          Updated Styleguide, icon design, development
+        </p>
+      </a>        
+
+    </div>
+ <!-- dark days pics-->
+
+      <div class="grid-item darkDays">
+        <a class="fancybox" data-fancybox data-type="iframe" href="https://dark-days-project.superhi.com/">
+
+        <p class="hovertext">
+        Dark Days 
+        <br><br>
+        Newspaper Editorial,  Responsive Website 
+        <br><br>
+        My Contribution
+        <br><br>
+        Composited Editorial, Layout, UX, Web Experience and Development <br><br>
+        </p>
+      </a>
+      </div>
+      <div class="grid-item darkDays">
+        <a class="fancybox" data-fancybox data-type="iframe" href="https://indd.adobe.com/view/f33c44c4-dbec-46f1-9e9d-24f428ff204b">
+
+        <p class="hovertext">
+        Dark Days - Print form
+        <br><br>
+        Digital Preview of the Newspaper Broadsheet
+         <br><br>
+       </p>
+      </a>
+        </div>
+
+      <!-- propertysponge pics-->
+  
+      <div class="grid-item propertySponge ">
+        <a class="fancybox" data-fancybox data-type="iframe" href="https://property-sponge-case-study.superhi.com/">
+
+        <p class="hovertext"> 
+          Property Sponge 
+          <br><br>
+          Webapp 
+          <br><br>
+          My Contribution
+          <br><br>
+           UX Hierarchy, Responsive UI Prototype with Motion <br><br>
+   </p>
+  </a>
+  
+      </div>
+<!--       treachery grid -->
+     
+        <div class="grid-item experimental tab">
+          <a class="fancybox" data-fancybox data-type="iframe" href="https://the-treachery-of-avatars.superhi.com/">
+
+          <p class="hovertext" >
+            The Treachery of Avatars
+            <br><br>
+             Experimental Webapp experience.
+                    <br><br>
+                   
+                 My Contribution
+                      <br><br>
+                      Design, 3d integration, THREE.JS and ML5 Posenet (body tracking) code<br><br> 
+            
+                        </p>
+        </a>
+      </div>
+<!--       href="https://mysite.pratt.edu/~mchicoin/bodytracking/character/young/index.html"
+       -->
+      
+</div>
+
+      
+        
+       
+<!-- end grid items -->
+
+ 
+
+<!-- partial -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>   
+    <script  src="artfolio.js"></script>
+<script src="summarytext.js"></script>
+  <script>
+    window.onload = function () {
+document.getElementById("firstbutton").click(); };
+  </script>
+</body>
+</html>

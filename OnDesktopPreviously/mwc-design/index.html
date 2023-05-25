@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" >
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
+    <style>
+        img {background: unset;}
+    </style>
+  </head>
+  <body><script src="/superhi.js"></script>
+    <nav role="navigation" id="navMobile">
+<div id="menuToggle">
+  <!--
+  A fake / hidden checkbox is used as click reciever,
+  so you can use the :checked selector on it.
+  -->
+  <input type="checkbox" />
+
+  <!--
+  Some spans to act as a hamburger.
+
+  They are acting like a real hamburger,
+  not that McDonalds stuff.
+  -->
+  <span></span>
+  <span></span>
+  <span></span>
+
+  <!--
+  Too bad the menu has to be inside of the button
+  but hey, it's pure CSS magic.
+  -->
+  <ul id="menu">
+    <a href="artfolio.html"><li>art</li></a>
+    <a href="design.html"><li>design</li></a>
+    <a href="code.html"><li>code</li></a>
+
+    <a href="https://drive.google.com/file/d/1WhfVSwlo5FcDqVVGtdVW1SUmtyJJyBRz/view?usp=sharing"><li>resume</li></a>
+    <a href="https://linktr.ee/artbygato"><li>links</li></a>
+
+  </ul>
+</div>
+</nav>
+    
+    
+    
+    <div class="container">
+      <section >
+        <div class="splashpage " >
+           <!-- <img src="titlesvg.svg" id="coverArt"> -->
+           <svg width="100%" height="100%" viewBox="0 0 100 100" style="position: absolute; top: 0; left: 0; z-index: 9999; pointer-events: none;">
+            <filter id="filter">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" seed="2" />
+              <feGaussianBlur stdDeviation="10" result="blur" />
+              <feColorMatrix type="saturate" values="15" in="turbulence" result="colormatrix"/>
+              <feColorMatrix type="matrix" values="1 0 0 0 0
+            0 1 0 0 0
+            0 0 1 0 0
+            0 0 0 150 -15" in="colormatrix" result="colormatrix1"/>
+              <feComposite in="SourceGraphic" in2="colormatrix1" operator="in" result="composite"/>
+              <feDisplacementMap in="SourceGraphic" in2="colormatrix1" scale="8" xChannelSelector="R" yChannelSelector="A" result="displacementMap"/>
+          </filter>
+            <rect x="0" y="0" width="100" height="100" filter="url(#myFilter)" fill="none" stroke="none" />
+          </svg>
+            <div id="intro-text">
+              <div class="line line-1">yo! </div>
+              <div class="line line-2">im marc</div>
+              <div class="line line-3">im <a href="artfolio.html">an artist</a></div>
+              <div class="line line-4">im <a href="design.html">a designer</a></div>
+              <div class="line line-5">im <a href="code.html">a coder</a></div>
+            </div>
+          
+           <div class="poster__rules" id="scene" data-clip-relative-input="true">
+            <div class="r-1" data-depth="1">
+              <svg width="800" height="800" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <rect width="800" height="800" stroke="#83D79B" fill="transparent" stroke-width="24" />
+              </svg>
+            </div>
+            <div class="r-2" data-depth="3">
+              <svg width="800" height="800" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <rect width="800" height="800" stroke="#83D79B" fill="transparent" stroke-width="16" />
+              </svg>
+            </div> 
+            <div class="r-3" data-depth="6">
+              <svg width="800" height="800" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <rect width="800" height="800" stroke="#83D79B" fill="transparent" stroke-width="16" />
+              </svg>
+            </div>
+            <div class="r-4" data-depth="8">
+              <svg width="800" height="400" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <rect width="1200" height="400" stroke="#83D79B" fill="transparent" stroke-width="16" />
+              </svg>
+            </div>
+          </div>
+          <!-- yellow -->
+          <div class="poster__rules yellow introtext " data-clip-relative-input="true">
+            <div class="r-1" data-depth="1">
+              <svg width="600" height="1200" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <rect width="900" height="800" stroke="#CBE39F" fill="transparent" stroke-width="24" />
+              </svg>
+            </div>
+            <div class="r-2" data-depth="3">
+              <svg width="400" height="700" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <rect width="800" height="900" stroke="#CBE39F" fill="transparent" stroke-width="16" />
+              </svg>
+            </div>
+            <div class="r-3" data-depth="6">
+              <svg width="800" height="800" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <rect width="1200" height="500" stroke="#CBE39F" fill="transparent" stroke-width="16" />
+              </svg>
+            </div>
+          <!-- end yellow -->
+          <!-- <p  class="subhead">Art | Design | Code<br/>_Illustration<br/>_UX<br/>_Front End Dev</p> -->
+        </div>
+      </section>
+    
+</div>
+
+    <!-- end panels gsap example --> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script> 
+    <script src="mwc.js"> </script>
+    <script src="turbulenceeffect.js"> </script>
+
+  </body>
+</html>

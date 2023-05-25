@@ -1,0 +1,20 @@
+{
+  "name": "Duck Face Image Replacer",
+  "version": "1.0",
+  "description": "Replaces all images on the web with pictures of people doing the duck face",
+  "manifest_version": 2,
+  "permissions": [
+    "activeTab",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": ["content.js"]
+    }
+  ]
+}

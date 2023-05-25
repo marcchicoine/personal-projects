@@ -1,0 +1,265 @@
+body {
+    background:#E4E4E4;
+    color: #232323;
+      font-family:'Raleway',sans-serif;
+    transition:.3s ease-out;
+    width:100vw;
+    overflow-x:hidden !important;
+    font-size:20px;
+  margin: 0 auto;
+  }
+p a{
+  color: #232323;
+  padding: 24px;
+}
+img {
+  background: #E4E4E4;
+  max-width: 500px;
+  width: 64vw;
+  min-width: 300px;
+  display: block;
+  margin: 10vh auto;
+
+}
+h2 {
+  display: block;
+  margin: 64px auto;
+  width: 100%;
+  text-align: center;
+  
+}
+.hand{
+    cursor:pointer!important;
+}
+
+div.slides img{
+    position: absolute;
+    min-width:300px;
+     width:64vw;
+    max-width: 500px;
+    transition:transform .5s;
+    height:auto;
+  display: block;
+   margin: 0 auto;
+}
+a img{
+    position:absolute;
+    z-index:0
+}
+div.slides img:first-child{
+    z-index:1
+}
+div.slides:hover img{
+    box-shadow:0 0 16px rgba(0,0,0,0.24);
+}
+
+section {
+  display: block;
+}
+section.mobileyes {
+    height: 80vh;
+  width: 45vw;
+  margin: 0 auto;
+
+}
+.txt p {
+  display: block;
+
+  width: 100vw;
+  text-align: center;
+ margin: 40px 0;
+}
+
+#menuToggle
+{
+  display: block;
+  position: relative;
+  top: 65px;
+  left: 50px;
+  z-index: 1000;
+
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#menuToggle a
+{
+  text-decoration: none;
+  color: #232323;
+
+  transition: color 0.3s ease;
+}
+
+#menuToggle a:hover
+{
+  color: #6ed492;
+}
+
+
+#menuToggle input
+{
+  display: block;
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  top: -7px;
+  left: -5px;
+
+  cursor: pointer;
+
+  opacity: 0; /* hide this */
+  z-index: 2; /* and place it over the hamburger */
+
+  -webkit-touch-callout: none;
+}
+
+/*
+ * Just a quick hamburger
+ */
+#menuToggle span
+{
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+
+  background: #cdcdcd;
+  border-radius: 3px;
+
+  z-index: 1;
+
+  transform-origin: 4px 0px;
+
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
+
+#menuToggle span:first-child
+{
+  transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2)
+{
+  transform-origin: 0% 100%;
+}
+
+/*
+ * Transform all the slices of hamburger
+ * into a crossmark.
+ */
+#menuToggle input:checked ~ span
+{
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: #232323;
+}
+
+/*
+ * But let's hide the middle one.
+ */
+#menuToggle input:checked ~ span:nth-last-child(3)
+{
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+/*
+ * Ohyeah and the last one should go the other direction
+ */
+#menuToggle input:checked ~ span:nth-last-child(2)
+{
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+/*
+ * Make this absolute positioned
+ * at the top left of the screen
+ */
+#menu
+{
+  position: absolute;
+  width: 300px;
+  margin: -100px 0 0 -50px;
+  padding: 50px;
+  padding-top: 125px;
+
+  background: #ededed;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  /* to stop flickering of text in safari */
+
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+#menu li
+{
+  padding: 10px 0;
+  font-size: 22px;
+}
+
+/*
+ * And let's slide it in from the left
+ */
+#menuToggle input:checked ~ ul{
+   transform: none;
+}
+
+.poster__rules div rect,.poster__rules2 div rect{
+    stroke-dasharray:1000;
+    -webkit-animation:dash 8s cubic-bezier(0.455,0.03,0.515,0.955) infinite alternate;
+    animation:dash 8s cubic-bezier(0.455,0.03,0.515,0.955) infinite alternate;
+}
+
+.r-1{
+    top:-40px;
+    right:0px;
+}
+.r-3{
+    bottom:50px;
+    left:50px;
+}
+.r-2{
+    top:0;
+    right:10px;
+}
+.poster__rules{
+    width:100%;
+    height:100%;
+    position:absolute;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:-1;
+    top:0;
+  left: 0;
+}
+@-webkit-keyframes dash{
+    0%{
+        stroke-dashoffset:0
+    }
+    100%{
+        stroke-dashoffset:3000
+    }
+}
+@keyframes dash{
+    0%{
+        stroke-dashoffset:0
+    }
+    100%{
+        stroke-dashoffset:3000
+    }
+}
+@media only screen and (max-width: 600px)  {
+  section.mobileyes {
+  width: 100vw;
+    height: 50vh;
+  margin: 0 auto;
+  text-align: center;
+  } k
+}

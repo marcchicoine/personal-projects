@@ -1,0 +1,21 @@
+cd C:\Program Files\Oracle\VirtualBox
+
+VBoxManage setextradata "macOS Big Sur" VBoxInternal2/EfiGraphicsResolution 1920x1080
+
+640x480
+
+800x600
+
+1024x768
+
+1280x1024
+
+1440x900
+
+1920x1200
+
+1920×1080 (FHD)
+
+2560×1440 (QHD)
+
+2048×1080 (2K)
